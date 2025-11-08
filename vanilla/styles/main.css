@@ -46,11 +46,10 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-
 /* end reset CSS */
 
 html {
-  font-size: 62.5%;
+  font-size: 62.5%; /* 1rem = 10px */
 }
 
 body {
