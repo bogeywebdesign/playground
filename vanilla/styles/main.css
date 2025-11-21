@@ -54,6 +54,17 @@ html {
 
 body {
   font-size: 1.4rem;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-areas:
+    "header header"
+    "main aside"
+    "footer footer";
+}
+
+* > :last-child {
+  margin-bottom: 0;
 }
 
 /* atomic elements */
@@ -94,3 +105,51 @@ ul {
   }
 }
 /* end atomic elements */
+
+header {
+  margin: 0 0 2rem;
+  text-align: center;
+  grid-area: header;
+
+  ul {
+    li {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background-color: black;
+
+      a {
+        color: white;
+        font-weight: bold;
+
+        &:hover {
+          text-decoration: none;;
+        }
+      }
+    }
+  }
+}
+
+main {
+  grid-area: main;
+
+  p {
+    + h2, + h3, + h4 {
+      margin-top: 2rem;
+    }
+  }
+}
+
+aside {
+  grid-area: aside;
+  padding: 4rem;
+  margin-left: 4rem;
+  background-color: lightgray;
+}
+
+footer {
+  grid-area: footer;
+  margin: 2rem 0 0;
+  padding: 2rem;
+  color: white;
+  background-color: rebeccapurple;
+}
