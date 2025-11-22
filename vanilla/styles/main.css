@@ -48,19 +48,30 @@ table {
 }
 /* end reset CSS */
 
+/* begin CSS variables */
+:root {
+  --primary-column-spacing: 2rem;
+  --minor-element-spacing: 1rem;
+  --major-element-spacing: 2rem;
+}
+/* end CSS variables */
+
 html {
   font-size: 62.5%; /* 1rem = 10px */
 }
 
 body {
   font-size: 1.4rem;
-  padding: 2rem;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-template-areas:
-    "header header"
-    "main aside"
-    "footer footer";
+  padding: var(--primary-column-spacing);
+
+  @media only screen and (min-width: 600px) {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas:
+      "header header"
+      "main aside"
+      "footer footer";
+  }
 }
 
 * > :last-child {
@@ -74,7 +85,7 @@ h3,
 h4,
 h5,
 h6 {
-  margin-bottom: 2rem;
+  margin-bottom: var(--primary-column-spacing);
   font-weight: bold;
 }
 
@@ -94,35 +105,50 @@ h6 {
 }
 
 p {
-  margin-bottom: 1rem;
+  margin-bottom: var(--minor-element-spacing);
 }
 
 ul {
-  margin-bottom: 1rem;
+  margin-bottom: var(--minor-element-spacing);
 
   li {
-    margin-bottom: 1rem;
+    margin-bottom: var(--minor-element-spacing);
   }
 }
 /* end atomic elements */
 
 header {
-  margin: 0 0 2rem;
+  margin: 0 0 var(--primary-column-spacing);
   text-align: center;
   grid-area: header;
 
   ul {
+    display: grid;
+    gap: 0 var(--minor-element-spacing);
+
+    @media only screen and (min-width: 600px) {
+      grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    }
+
     li {
       display: inline-block;
-      padding: 1rem 2rem;
       background-color: black;
+      margin-bottom: inherit;
+
+      @media only screen and (max-width: 600px) {
+        + li {
+          margin-top: var(--minor-element-spacing);
+        }
+      }
 
       a {
         color: white;
         font-weight: bold;
+        display: block;
+        padding: var(--minor-element-spacing) var(--major-element-spacing);
 
         &:hover {
-          text-decoration: none;;
+          text-decoration: none;
         }
       }
     }
@@ -134,22 +160,26 @@ main {
 
   p {
     + h2, + h3, + h4 {
-      margin-top: 2rem;
+      margin-top: var(--major-element-spacing);
     }
   }
 }
 
 aside {
   grid-area: aside;
-  padding: 4rem;
-  margin-left: 4rem;
+  padding: var(--primary-column-spacing);
   background-color: lightgray;
+  margin: var(--primary-column-spacing) 0 0;
+
+  @media only screen and (min-width: 600px) {
+    margin: 0 0 0 4rem;
+  }
 }
 
 footer {
   grid-area: footer;
-  margin: 2rem 0 0;
-  padding: 2rem;
+  margin: var(--primary-column-spacing) 0 0;
+  padding: var(--primary-column-spacing);
   color: white;
   background-color: rebeccapurple;
 }
